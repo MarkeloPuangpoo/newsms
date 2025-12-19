@@ -1,0 +1,38 @@
+Loading .env.local...
+Testing connection to: https://enbcszwenarboanxwmkf.supabase.co
+
+--- Test 0: Check Public Schema (profiles) ---
+Public Schema check passed (profiles table exists).
+Admin listUsers failed: AuthApiError: Database error finding users
+    at handleError (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:102:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async _handleRequest (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:195:5)
+    at async _request (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:157:16)
+    at async GoTrueAdminApi.listUsers (E:\newsms\node_modules\@supabase\auth-js\src\GoTrueAdminApi.ts:222:24)
+    at async run (E:\newsms\debug_supa.ts:59:51) {
+  __isAuthError: true,
+  status: 500,
+  code: 'unexpected_failure'
+}
+
+--- Test 1.5: SignUp (Trigger Test) ---
+SignUp failed: AuthApiError: Email address "debug_test_1765982318506@example.com" is invalid
+    at handleError (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:102:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async _handleRequest (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:195:5)
+    at async _request (E:\newsms\node_modules\@supabase\auth-js\src\lib\fetch.ts:157:16)
+    at async SupabaseAuthClient.signUp (E:\newsms\node_modules\@supabase\auth-js\src\GoTrueClient.ts:606:15)
+    at async run (E:\newsms\debug_supa.ts:80:33) {
+  __isAuthError: true,
+  status: 400,
+  code: 'email_address_invalid'
+}
+
+--- Test 2: SignIn (Teacher) ---
+SignIn failed: Invalid login credentials
+Full Error Object: {
+  "__isAuthError": true,
+  "name": "AuthApiError",
+  "status": 400,
+  "code": "invalid_credentials"
+}

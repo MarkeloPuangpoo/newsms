@@ -16,6 +16,23 @@ const supabase = createClient(
 
 export async function GET() {
     try {
+        // 0. Create Super Admin
+        const { error: adminError } = await supabase.auth.admin.createUser({
+            email: "drvvdre@gmail.com",
+            password: "0650126523",
+            email_confirm: true,
+            user_metadata: {
+                full_name: "Mr.Pondet",
+                role: "superadmin",
+                avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Admin"
+            }
+        });
+
+        // If user already exists, ignore error
+        if (adminError && !adminError.message.includes("already registered")) {
+            throw adminError;
+        }
+
         // 1. Create Teacher
         const { data: teacherUser, error: teacherError } = await supabase.auth.admin.createUser({
             email: "teacher@demo.com",

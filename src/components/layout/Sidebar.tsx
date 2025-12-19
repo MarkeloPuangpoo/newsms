@@ -112,11 +112,11 @@ export function Sidebar({ role }: SidebarProps) {
                                         className={cn(
                                             "flex items-center rounded-md px-3 py-2 text-sm transition-all duration-200 group",
                                             isActive
-                                                ? "bg-white/10 text-white shadow-sm ring-1 ring-white/10"
-                                                : "text-zinc-400 hover:bg-white/5 hover:text-white"
+                                                ? "bg-indigo-500/15 text-white shadow-sm ring-1 ring-indigo-500/30"
+                                                : "text-zinc-300 hover:bg-white/5 hover:text-white"
                                         )}
                                     >
-                                        <Icon className={cn("h-4 w-4 mr-3 transition-colors", isActive ? "text-indigo-400" : "text-zinc-500 group-hover:text-zinc-300")} />
+                                        <Icon className={cn("h-4 w-4 mr-3 transition-colors", isActive ? "text-indigo-400" : "text-zinc-400 group-hover:text-zinc-200")} />
                                         <span>{link.name}</span>
                                     </Link>
                                 </li>
@@ -128,12 +128,12 @@ export function Sidebar({ role }: SidebarProps) {
                 <div className="border-t border-white/5 pt-4">
                     {/* User Profile Mini Block */}
                     <div className="flex items-center px-2 mb-4 gap-3">
-                        <div className="h-8 w-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs text-zinc-400">
+                        <div className="h-8 w-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-xs text-indigo-300 font-medium">
                             {role[0].toUpperCase()}
                         </div>
                         <div className="flex-1 min-w-0">
                             <p className="text-sm font-medium text-white truncate capitalize">{role}</p>
-                            <p className="text-xs text-zinc-500 truncate">View Profile</p>
+                            <p className="text-xs text-zinc-400 truncate">View Profile</p>
                         </div>
                     </div>
 
