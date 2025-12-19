@@ -36,52 +36,58 @@
   --font-sans: var(--font-inter);
 }
 
+/* Light Theme - พื้นหลังมี layering เพื่อให้ cards เด่น */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 10% 3.9%;
+  --background: 210 40% 98%;
+  /* slate-50 - พื้นหลังหลัก */
+  --foreground: 222 47% 11%;
+  /* slate-900 */
   --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  /* white - cards เด่นขึ้น */
+  --card-foreground: 222 47% 11%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
-  --radius: 0.5rem;
+  --popover-foreground: 222 47% 11%;
+  --primary: 225 65% 55%;
+  /* indigo-600 */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 40% 96%;
+  /* slate-100 */
+  --secondary-foreground: 222 47% 11%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+  /* slate-500 */
+  --accent: 225 65% 55%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 32% 91%;
+  /* slate-200 */
+  --input: 214 32% 91%;
+  --ring: 225 65% 55%;
+  --radius: 0.75rem;
 }
 
+/* Dark Theme - keep for system preference */
 .dark {
-  --background: 0 0% 4%;
-  /* Slightly brighter for better contrast */
-  --foreground: 0 0% 98%;
-  --card: 0 0% 6%;
-  --card-foreground: 0 0% 98%;
-  --popover: 0 0% 5%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 18%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 18%;
-  --muted-foreground: 240 5% 75%;
-  /* Much brighter for readability */
-  --accent: 240 3.7% 18%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 35%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 22%;
-  /* Brighter borders for visibility */
-  --input: 240 3.7% 20%;
-  --ring: 240 4.9% 83.9%;
+  --background: 222 47% 6%;
+  --foreground: 210 40% 98%;
+  --card: 222 47% 8%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222 47% 8%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 225 65% 60%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+  --accent: 217 33% 17%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 63% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 225 65% 60%;
 }
 
 @layer base {
@@ -90,75 +96,189 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 }
 
-/* Glassmorphism Utilities */
-.glass {
-  @apply bg-background/60 backdrop-blur-lg border border-white/10;
+/* ========================================
+   PREMIUM CARD STYLES
+   ======================================== */
+
+/* Card with shadow and border - สำหรับ Stats Cards */
+.card-elevated {
+  @apply bg-white rounded-2xl border border-slate-100 shadow-sm;
+  transition: all 0.2s ease;
 }
 
-.glass-card {
-  @apply bg-card/50 backdrop-blur-md border border-white/10 shadow-lg;
+.card-elevated:hover {
+  @apply shadow-md;
+  transform: translateY(-1px);
 }
 
-/* Premium Glow Effects */
-.glow-primary {
-  box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+/* Card without hover effect */
+.card-flat {
+  @apply bg-white rounded-xl border border-slate-100;
 }
 
-.glow-hover {
-  transition: box-shadow 0.3s ease;
+/* ========================================
+   BUTTON STYLES
+   ======================================== */
+
+/* Primary Button - ชัดเจน actionable */
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded-lg;
+  @apply transition-all shadow-sm active:scale-95;
 }
 
-.glow-hover:hover {
-  box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
+/* Secondary Button */
+.btn-secondary {
+  @apply bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-4 py-2 rounded-lg;
+  @apply transition-all;
 }
 
-/* Gradient Border */
-.gradient-border {
-  position: relative;
+/* Outline Button */
+.btn-outline {
+  @apply border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium px-4 py-2 rounded-lg;
+  @apply transition-all;
 }
 
-.gradient-border::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.2), transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+/* Danger Button */
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-lg;
+  @apply transition-all shadow-sm active:scale-95;
 }
 
-/* Enhanced Text Colors for Dark Theme */
-.text-soft {
-  color: rgb(212, 212, 216);
-  /* zinc-300 equivalent */
+/* ========================================
+   SIDEBAR STYLES
+   ======================================== */
+
+/* Dark Sidebar - ดู professional */
+.sidebar-dark {
+  @apply bg-slate-900 text-slate-300;
 }
 
-.text-softer {
-  color: rgb(161, 161, 170);
-  /* zinc-400 equivalent */
+.sidebar-dark .sidebar-link {
+  @apply text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg px-3 py-2 transition-all;
 }
 
-/* Subtle animations */
-@keyframes subtle-pulse {
+.sidebar-dark .sidebar-link.active {
+  @apply bg-indigo-600 text-white;
+}
 
-  0%,
-  100% {
-    opacity: 1;
+/* ========================================
+   HEADER STYLES
+   ======================================== */
+
+/* Sticky Header with blur */
+.header-sticky {
+  @apply bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-30;
+}
+
+/* ========================================
+   FORM STYLES
+   ======================================== */
+
+/* Input Fields */
+.input-field {
+  @apply w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-slate-900;
+  @apply placeholder-slate-400;
+  @apply focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500;
+  @apply transition-colors;
+}
+
+/* Select Fields */
+.select-field {
+  @apply w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 text-slate-900;
+  @apply focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500;
+  @apply transition-colors;
+}
+
+/* Labels */
+.label {
+  @apply block text-sm font-medium text-slate-700 mb-1.5;
+}
+
+/* ========================================
+   TABLE STYLES
+   ======================================== */
+
+/* Premium Table Styles */
+@layer components {
+  .table-container {
+    @apply bg-white rounded-2xl border border-slate-200/60 shadow-sm overflow-hidden;
+  }
+  
+  .table-header {
+    @apply bg-slate-50/50 border-b border-slate-100 text-slate-500 font-semibold uppercase tracking-wider;
   }
 
-  50% {
-    opacity: 0.8;
+  .table-row {
+    @apply hover:bg-slate-50/80 transition-colors duration-150;
+  }
+
+  .avatar {
+    @apply h-10 w-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center overflow-hidden shadow-sm;
+  }
+
+  .badge-primary {
+    @apply px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-600 text-xs font-bold border border-indigo-100;
   }
 }
 
-.animate-subtle-pulse {
-  animation: subtle-pulse 3s ease-in-out infinite;
+/* ========================================
+   BADGE STYLES
+   ======================================== */
+
+.badge-primary {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  @apply bg-indigo-100 text-indigo-700 border border-indigo-200;
+}
+
+.badge-success {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  @apply bg-emerald-100 text-emerald-700 border border-emerald-200;
+}
+
+.badge-warning {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  @apply bg-amber-100 text-amber-700 border border-amber-200;
+}
+
+.badge-danger {
+  @apply inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium;
+  @apply bg-red-100 text-red-700 border border-red-200;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.empty-state {
+  @apply flex flex-col items-center justify-center py-12 text-center;
+}
+
+.empty-state-icon {
+  @apply w-16 h-16 text-slate-300 mb-4;
+}
+
+.empty-state-title {
+  @apply text-lg font-medium text-slate-900 mb-2;
+}
+
+.empty-state-description {
+  @apply text-sm text-slate-500 max-w-sm;
+}
+
+/* ========================================
+   AVATAR STYLES
+   ======================================== */
+
+.avatar {
+  @apply w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center;
+  @apply text-sm font-medium text-indigo-600;
+}
+
+.avatar-lg {
+  @apply w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center;
+  @apply text-base font-medium text-indigo-600;
 }

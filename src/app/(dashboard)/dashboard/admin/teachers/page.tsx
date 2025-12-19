@@ -37,10 +37,10 @@ export default async function TeachersPage() {
                 <AddTeacherButton />
             </div>
 
-            <div className="bg-zinc-900/50 border border-zinc-700/50 rounded-xl overflow-hidden backdrop-blur-sm shadow-xl">
+            <div className="table-container">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm">
-                        <thead className="bg-zinc-800/50 text-zinc-300 font-medium border-b border-zinc-700/50">
+                        <thead className="table-header">
                             <tr>
                                 <th className="px-6 py-4">Name</th>
                                 <th className="px-6 py-4">Employee ID</th>
@@ -48,19 +48,19 @@ export default async function TeachersPage() {
                                 <th className="px-6 py-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-zinc-700/30">
+                        <tbody className="divide-y divide-slate-50">
                             {!teachers || teachers.length === 0 ? (
                                 <tr>
-                                    <td colSpan={4} className="px-6 py-12 text-center text-zinc-400">
+                                    <td colSpan={4} className="px-6 py-12 text-center text-slate-500">
                                         No teachers found. Click "Add Teacher" to create one.
                                     </td>
                                 </tr>
                             ) : (
                                 teachers.map((teacher: any) => (
-                                    <tr key={teacher.profile_id} className="group hover:bg-white/[0.02] transition-colors">
+                                    <tr key={teacher.profile_id} className="table-row group">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-9 h-9 rounded-full overflow-hidden bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0">
+                                                <div className="avatar">
                                                     {teacher.profiles?.avatar_url ? (
                                                         <img
                                                             src={teacher.profiles.avatar_url}
@@ -68,25 +68,25 @@ export default async function TeachersPage() {
                                                             className="w-full h-full object-cover"
                                                         />
                                                     ) : (
-                                                        <span className="text-xs font-medium text-indigo-300">
+                                                        <span className="text-sm font-medium text-indigo-600">
                                                             {teacher.profiles?.full_name?.charAt(0) || "T"}
                                                         </span>
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <div className="font-medium text-zinc-200">
+                                                    <div className="font-medium text-slate-900">
                                                         {teacher.profiles?.full_name || "Unknown Name"}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className="font-mono text-xs text-zinc-300 bg-zinc-800/80 px-2.5 py-1 rounded border border-zinc-700/50">
+                                            <span className="font-mono text-xs text-slate-600 bg-slate-100 px-2.5 py-1 rounded border border-slate-200">
                                                 {teacher.employee_id}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                                            <span className="badge-primary">
                                                 {teacher.department || "Unassigned"}
                                             </span>
                                         </td>

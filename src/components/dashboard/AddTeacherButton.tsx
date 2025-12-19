@@ -36,7 +36,7 @@ export function AddTeacherButton() {
         <>
             <button
                 onClick={() => setIsOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium transition-colors shadow-lg shadow-indigo-500/25"
+                className="btn-primary flex items-center gap-2"
             >
                 <Plus className="w-4 h-4" />
                 Add Teacher
@@ -46,51 +46,51 @@ export function AddTeacherButton() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-2">
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Full Name</label>
+                            <label className="label">Full Name</label>
                             <input
                                 type="text"
                                 value={formData.fullName}
                                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                className="w-full bg-zinc-900/80 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-colors"
+                                className="input-field"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Email</label>
+                            <label className="label">Email</label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full bg-zinc-900/80 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-colors"
+                                className="input-field"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Password</label>
+                            <label className="label">Password</label>
                             <input
                                 type="password"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                className="w-full bg-zinc-900/80 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-colors"
+                                className="input-field"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Employee ID</label>
+                            <label className="label">Employee ID</label>
                             <input
                                 type="text"
                                 value={formData.employeeId}
                                 onChange={(e) => setFormData({ ...formData, employeeId: e.target.value })}
-                                className="w-full bg-zinc-900/80 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-colors"
+                                className="input-field"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-300 mb-1.5">Department</label>
+                            <label className="label">Department</label>
                             <select
                                 value={formData.department}
                                 onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                                className="w-full bg-zinc-900/80 border border-zinc-700 rounded-lg px-3 py-2.5 text-white placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 transition-colors"
+                                className="input-field"
                                 required
                             >
                                 <option value="">Select Department</option>
@@ -105,14 +105,14 @@ export function AddTeacherButton() {
                         <button
                             type="button"
                             onClick={() => setIsOpen(false)}
-                            className="px-4 py-2 text-sm font-medium text-zinc-300 hover:text-white transition-colors"
+                            className="btn-secondary"
                         >
                             Cancel
                         </button>
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 shadow-lg shadow-indigo-500/20"
+                            className="btn-primary"
                         >
                             {isPending ? "Creating..." : "Create Teacher"}
                         </button>

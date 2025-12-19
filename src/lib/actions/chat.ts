@@ -78,7 +78,7 @@ export async function getMessages(otherUserId: string) {
     return data;
 }
 
-export async function sendMessage(content: string, receiverId: string) {
+export async function sendMessage(content: string, receiverId: string, fileUrl?: string, fileType?: string) {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -88,6 +88,8 @@ export async function sendMessage(content: string, receiverId: string) {
         sender_id: user.id,
         receiver_id: receiverId,
         content,
+        file_url: fileUrl,
+        file_type: fileType,
         is_read: false,
     });
 
@@ -100,4 +102,74 @@ export async function sendMessage(content: string, receiverId: string) {
     // but it's good practice for initial load consistency.
     revalidatePath("/dashboard/messages");
     return { success: true };
+}
+
+// New import for Admin client
+import { createClient as createAdminClient } from "@supabase/supabase-js";
+
+export async function deleteChatHistory(contactId: string) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { error: "Unauthorized" };
+
+    // 1. Check if user is Teacher or Superadmin
+    const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+    const role = profile?.role;
+    const canDelete = role === "teacher" || role === "superadmin";
+
+    if (!canDelete) {
+        return { error: "Permission denied" };
+    }
+
+    // 2. Use Service Role to bypass RLS and delete ALL messages between these two
+    const adminSupabase = createAdminClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.SUPABASE_SERVICE_ROLE_KEY!
+    );
+
+    const { error } = await adminSupabase
+        .from("messages")
+        .delete()
+        .or(`and(sender_id.eq.${user.id},receiver_id.eq.${contactId}),and(sender_id.eq.${contactId},receiver_id.eq.${user.id})`);
+
+    if (error) {
+        console.error("Delete chat error:", error);
+        return { error: error.message };
+    }
+
+    revalidatePath("/dashboard/messages");
+    return { success: true };
+}
+
+export async function getLinkMetadata(url: string) {
+    try {
+        const response = await fetch(url, { next: { revalidate: 3600 } }); // Cache for 1 hour
+        const html = await response.text();
+
+        // Simple Regex for OG Tags
+        const getMeta = (property: string) => {
+            const match = html.match(new RegExp(`<meta[^>]*property=["']${property}["'][^>]*content=["']([^"']*)["']`, 'i'))
+                || html.match(new RegExp(`<meta[^>]*content=["']([^"']*)["'][^>]*property=["']${property}["']`, 'i'));
+            return match ? match[1] : null;
+        };
+
+        const title = getMeta("og:title") || html.match(/<title>(.*?)<\/title>/i)?.[1];
+        const description = getMeta("og:description");
+        const image = getMeta("og:image");
+
+        return {
+            title,
+            description,
+            image,
+            url
+        };
+    } catch (error) {
+        console.error("Error fetching link metadata:", error);
+        return null;
+    }
 }

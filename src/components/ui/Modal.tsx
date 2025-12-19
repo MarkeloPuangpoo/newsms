@@ -33,7 +33,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm"
+                        className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm"
                     />
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -42,12 +42,12 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
                     >
-                        <div className="w-full max-w-lg bg-zinc-900/95 border border-zinc-700/60 rounded-xl shadow-2xl pointer-events-auto overflow-hidden glow-primary">
-                            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-700/50 bg-gradient-to-r from-zinc-900 to-zinc-800/50">
-                                <h2 className="text-lg font-semibold text-white">{title}</h2>
+                        <div className="w-full max-w-lg bg-white border border-slate-200 rounded-2xl shadow-xl pointer-events-auto overflow-hidden">
+                            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50">
+                                <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
                                 <button
                                     onClick={onClose}
-                                    className="text-zinc-400 hover:text-white hover:bg-white/10 rounded-lg p-1.5 transition-colors"
+                                    className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg p-1.5 transition-colors"
                                 >
                                     <X className="h-5 w-5" />
                                 </button>
